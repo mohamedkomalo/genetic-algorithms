@@ -105,7 +105,11 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
 	private void replaceInPopulation(ChromosomePair<GeneType> parents,
 			ChromosomePair<GeneType> offSprings) {
+		population.remove(parents.chromosome1);
+		population.remove(parents.chromosome2);
 
+		population.add(offSprings.chromosome1);
+		population.add(offSprings.chromosome2);
 	}
 	
 	private void generateRandomPopulation(){
