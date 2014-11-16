@@ -1,9 +1,9 @@
 package komalo.genetic_algorithms;
 
-interface ChromosomeCodec<T, ChromosomeGeneType> {
+interface ChromosomeCodec<SolutionType, ChromosomeGeneType> {
 
-	Chromosome<ChromosomeGeneType> encode(T value);
+	Chromosome<ChromosomeGeneType> encode(SolutionType value);
 
-	T decode(Chromosome<ChromosomeGeneType> value);
+	SolutionType decode(Chromosome<ChromosomeGeneType> value);
 
 }
