@@ -8,9 +8,13 @@ import java.util.TreeMap;
 public class Chromosome<GeneType> {
 
 	Map<Integer, GeneType> genes;
-
+	
+	int length;
+	
 	public Chromosome(int length) {
 		genes = new TreeMap<>();
+		
+		this.length = length;
 	}
 
 	public GeneType getGeneAt(int index) {
@@ -19,5 +23,9 @@ public class Chromosome<GeneType> {
 
 	public void setGeneAt(int index, GeneType value) {
 		genes.put(index, value);
+	}
+	
+	public int length(){
+		return length;
 	}
 }

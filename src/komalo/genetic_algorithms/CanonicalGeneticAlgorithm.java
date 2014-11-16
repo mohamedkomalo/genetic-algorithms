@@ -13,7 +13,7 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
 	ChromosomeCodec<SolutionType, GeneType> chromosomeCodec;
 
-	ChromosomeMutator<GeneType> chromosomeMutator;
+	GeneMutator<GeneType> geneMutator;
 	
 	FitnessFunction<SolutionType> fitnessFunction;
 
@@ -30,7 +30,7 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 	public CanonicalGeneticAlgorithm(double populationNo, int iterationsNo,
 			double mutationProbability, double crossOverProbability,
 			FitnessFunction<SolutionType> fitnessFunction, ChromosomeCodec<SolutionType, GeneType> chromosomeCodec,
-			ChromosomeMutator<GeneType> chromosomeMutator) {
+			GeneMutator<GeneType> chromosomeMutator) {
 		
 		this.populationNo = populationNo;
 		this.iterationsNo = iterationsNo;
@@ -38,7 +38,7 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 		this.mutationProbability = mutationProbability;
 		this.crossOverProbability = crossOverProbability;
 		this.chromosomeCodec = chromosomeCodec;
-		this.chromosomeMutator = chromosomeMutator;
+		this.geneMutator = chromosomeMutator;
 	}
 
 	public void solve() {
@@ -117,7 +117,15 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 	}
 	
 	public void mutateChromosomeInPlace(Chromosome<GeneType> chromosome){
-		
+		for(int i=0; i<chromosome.length; i++){
+			double randomNumber = randomGenerator.nextDouble();
+			
+			if(randomNumber < mutationProbability){
+				GeneType newGene = geneMutator.mutuateGene(chromosome.getGeneAt(i));
+				
+				chromosome.setGeneAt(i, newGene);
+			}
+		}
 	}
 
 	private static class ChromosomePair<GeneType> {
