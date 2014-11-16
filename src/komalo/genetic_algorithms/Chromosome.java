@@ -2,13 +2,15 @@ package komalo.genetic_algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Chromosome<GeneType> {
 
-	List<GeneType> genes;
+	Map<Integer, GeneType> genes;
 
 	public Chromosome(int length) {
-		genes = new ArrayList<>(length);
+		genes = new TreeMap<>();
 	}
 
 	public GeneType getGeneAt(int index) {
@@ -16,6 +18,6 @@ public class Chromosome<GeneType> {
 	}
 
 	public void setGeneAt(int index, GeneType value) {
-		genes.add(index, value);
+		genes.put(index, value);
 	}
 }
