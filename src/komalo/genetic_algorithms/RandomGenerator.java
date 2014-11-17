@@ -1,5 +1,5 @@
 package komalo.genetic_algorithms;
 
-interface RandomGenerator<T> {
+public interface RandomGenerator<T> {
 	T generateRandom();
 }
