@@ -1,6 +1,5 @@
 package komalo.genetic_algorithms.curve_fitting;
 
-import java.awt.Point;
 import java.util.Set;
 
 import komalo.genetic_algorithms.FitnessFunction;
@@ -26,9 +25,9 @@ public class CurveFittingFitnessFunction implements FitnessFunction<Double[]> {
 		for(Point p : points){
 			double actualY = 0;
 			for(int degree=0; degree <= polynomialDegree; degree++){
-				actualY += coefficients[degree] * Math.pow(p.x, degree);
+				actualY += coefficients[degree] * Math.pow(p.getX(), degree);
 			}
-			meanSquareError += (actualY - p.y) * (actualY - p.y);
+			meanSquareError += (actualY - p.getY()) * (actualY - p.getY());
 		}
 		
 		meanSquareError /= points.size();

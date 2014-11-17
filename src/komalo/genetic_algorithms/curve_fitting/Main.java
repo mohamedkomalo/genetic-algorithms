@@ -1,6 +1,6 @@
 package komalo.genetic_algorithms.curve_fitting;
 
-import java.awt.Point;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -28,8 +28,8 @@ public class Main {
 
 			while (noOfPoints-- > 0) {
 				Point newPoint = new Point();
-				newPoint.x = scanner.nextInt();
-				newPoint.y = scanner.nextInt();
+				newPoint.setX(scanner.nextDouble());
+				newPoint.setY(scanner.nextDouble());
 
 				points.add(newPoint);
 			}
