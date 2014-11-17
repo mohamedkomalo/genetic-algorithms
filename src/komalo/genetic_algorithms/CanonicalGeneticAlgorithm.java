@@ -57,6 +57,22 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 			replaceInPopulation(parents, offSprings);
 		}
 	}
+	
+	public SolutionInfo getBestSolution(){
+		SolutionInfo solutionInfo = new SolutionInfo();
+		
+		for (Chromosome<GeneType> chromosome : population) {
+				SolutionType decoded = chromosomeCodec.decode(chromosome);
+				double fitness = fitnessFunction.evaluate(decoded);
+				
+				if(fitness > solutionInfo.fitness){
+					solutionInfo.solution = decoded;
+					solutionInfo.fitness = fitness;
+				}
+		}
+		
+		return solutionInfo;
+	}
 
 	private ChromosomePair<GeneType> selectParents() {
 		List<Double> cummulativeFitness = new LinkedList<>();
@@ -168,6 +184,18 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 			
 			this.chromosome1 = chromosome1;
 			this.chromosome2 = chromosome2;
+		}
+	}
+	
+	public class SolutionInfo{
+		SolutionType solution;
+		double fitness;
+		
+		public SolutionType getSolution() {
+			return solution;
+		}
+		public double getFitness() {
+			return fitness;
 		}
 	}
 }
