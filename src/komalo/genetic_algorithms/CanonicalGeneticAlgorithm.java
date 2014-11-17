@@ -22,12 +22,14 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 	private final double populationNo;
 
 	private Random randomGenerator = new Random();
+	
+	private RandomGenerator<SolutionType> randomSolutionGenerator;
 
 	public CanonicalGeneticAlgorithm(double populationNo, int iterationsNo,
 			double mutationProbability,
 			FitnessFunction<SolutionType> fitnessFunction,
 			ChromosomeCodec<SolutionType, GeneType> chromosomeCodec,
-			GeneMutator<GeneType> chromosomeMutator) {
+			GeneMutator<GeneType> chromosomeMutator, RandomGenerator<SolutionType> randomSolutionGenerator) {
 
 		this.populationNo = populationNo;
 		this.iterationsNo = iterationsNo;
@@ -35,6 +37,7 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 		this.mutationProbability = mutationProbability;
 		this.chromosomeCodec = chromosomeCodec;
 		this.geneMutator = chromosomeMutator;
+		this.randomSolutionGenerator = randomSolutionGenerator;
 	}
 
 	public void solve() {
@@ -134,7 +137,13 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 	}
 
 	private void generateRandomPopulation() {
-		throw new RuntimeException("Not implemented");
+		for(int i=0; i<populationNo; i++){
+			SolutionType randomSolution = randomSolutionGenerator.generateRandom();
+			
+			Chromosome<GeneType> encodedSolution = chromosomeCodec.encode(randomSolution);
+			
+			population.add(encodedSolution);
+		}
 	}
 
 	public void mutateChromosomeInPlace(Chromosome<GeneType> chromosome) {
