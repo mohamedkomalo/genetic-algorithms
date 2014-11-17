@@ -115,7 +115,7 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 		while (parent1 == parent2){
 			parent2 = selectRandomParent(cummulativeFitness, chromosomes);
 			
-			if(++trials > 20)
+			if(++trials > 100)
 				throw new RuntimeException("exceeded max ammount of tries to randomly select a parent");
 		}
 

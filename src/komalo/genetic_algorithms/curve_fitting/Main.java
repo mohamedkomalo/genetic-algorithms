@@ -49,14 +49,20 @@ public class Main {
 	 * @param points
 	 */
 	private static void processInput(int polynomialDegree, Set<Point> points) {
-		int lowerBound = -100;
-		int upperBound = 100;
+		double lowerBound = Integer.MAX_VALUE;
+		double upperBound = Integer.MIN_VALUE;
+		
+		for(Point p : points){
+			//lowerBound = Math.min(lowerBound, p.getY());
+			upperBound = Math.max(upperBound, p.getY());
+		}
+		lowerBound = upperBound - 2 * upperBound;
 
 		int populationNo = 50;
-		int iterationsNo = 100;
+		int iterationsNo = 500;
 		
-		double mutationProbability = 0.0001;
-		double crossOverProbability = 0.4;
+		double mutationProbability = 0.1;
+		double crossOverProbability = 0.7;
 
 		FitnessFunction<Double[]> fitnessFunction;
 		GeneMutator<Double> geneMutator;
