@@ -7,9 +7,9 @@ import java.util.TreeMap;
 
 public class Chromosome<GeneType> {
 
-	Map<Integer, GeneType> genes;
+	private Map<Integer, GeneType> genes;
 	
-	int length;
+	private int length;
 	
 	public Chromosome(int length) {
 		genes = new TreeMap<>();
@@ -26,6 +26,6 @@ public class Chromosome<GeneType> {
 	}
 	
 	public int length(){
-		return length;
+		return this.length;
 	}
 }

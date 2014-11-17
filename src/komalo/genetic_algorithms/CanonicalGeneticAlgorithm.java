@@ -5,17 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import javax.management.RuntimeErrorException;
-
 public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
-	List<Chromosome<GeneType>> population = new ArrayList<>();
+	private List<Chromosome<GeneType>> population = new ArrayList<>();
 
-	ChromosomeCodec<SolutionType, GeneType> chromosomeCodec;
+	private ChromosomeCodec<SolutionType, GeneType> chromosomeCodec;
 
-	GeneMutator<GeneType> geneMutator;
+	private GeneMutator<GeneType> geneMutator;
 	
-	FitnessFunction<SolutionType> fitnessFunction;
+	private FitnessFunction<SolutionType> fitnessFunction;
 
 	private int iterationsNo;
 
@@ -113,11 +111,11 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 	}
 	
 	private void generateRandomPopulation(){
-		
+		throw new RuntimeException("Not implemented");
 	}
 	
 	public void mutateChromosomeInPlace(Chromosome<GeneType> chromosome){
-		for(int i=0; i<chromosome.length; i++){
+		for(int i=0; i<chromosome.length(); i++){
 			double randomNumber = randomGenerator.nextDouble();
 			
 			if(randomNumber < mutationProbability){
