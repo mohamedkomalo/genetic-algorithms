@@ -47,13 +47,13 @@ public class Main {
 	 * @param points
 	 */
 	private static void processInput(int polynomialDegree, Set<Point> points) {
-		int lowerBound = 0;
-		int upperBound = 10;
+		int lowerBound = -100;
+		int upperBound = 100;
 
-		int populationNo = 100;
+		int populationNo = 50;
 		int iterationsNo = 100;
 		
-		double mutationProbability = 0.01;
+		double mutationProbability = 0.0001;
 
 		FitnessFunction<Double[]> fitnessFunction;
 		GeneMutator<Double> geneMutator;
