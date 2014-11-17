@@ -19,14 +19,12 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
 	private final double mutationProbability;
 
-	private final double crossOverProbability;
-
 	private final double populationNo;
 
 	private Random randomGenerator = new Random();
 
 	public CanonicalGeneticAlgorithm(double populationNo, int iterationsNo,
-			double mutationProbability, double crossOverProbability,
+			double mutationProbability,
 			FitnessFunction<SolutionType> fitnessFunction,
 			ChromosomeCodec<SolutionType, GeneType> chromosomeCodec,
 			GeneMutator<GeneType> chromosomeMutator) {
@@ -35,7 +33,6 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 		this.iterationsNo = iterationsNo;
 		this.fitnessFunction = fitnessFunction;
 		this.mutationProbability = mutationProbability;
-		this.crossOverProbability = crossOverProbability;
 		this.chromosomeCodec = chromosomeCodec;
 		this.geneMutator = chromosomeMutator;
 	}
