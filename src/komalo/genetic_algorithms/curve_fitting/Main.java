@@ -56,6 +56,7 @@ public class Main {
 		int iterationsNo = 100;
 		
 		double mutationProbability = 0.0001;
+		double crossOverProbability = 0.4;
 
 		FitnessFunction<Double[]> fitnessFunction;
 		GeneMutator<Double> geneMutator;
@@ -71,14 +72,14 @@ public class Main {
 		randomGenerator = new CurveFittingsSolutionGenerator(lowerBound, upperBound, polynomialDegree);
 
 		CanonicalGeneticAlgorithm<Double[], Double> algorithm = new CanonicalGeneticAlgorithm<>(
-				populationNo, iterationsNo, mutationProbability,
+				populationNo, iterationsNo, mutationProbability, crossOverProbability,
 				fitnessFunction, chromosomeCodec, geneMutator, randomGenerator);
 
 		algorithm.solve();
 
 		CanonicalGeneticAlgorithm<Double[], Double>.SolutionInfo info = algorithm.getBestSolution();
 		
-		Main.output("Coefficients: " + Arrays.toString(info.getSolution()) + " Error: " + info.getFitness());
+		Main.output("Coefficients: " + Arrays.toString(info.getSolution()) + " Error: " + 1.0 / info.getFitness());
 	}
 
 	public static void output(String x) {

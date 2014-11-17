@@ -32,6 +32,6 @@ public class CurveFittingFitnessFunction implements FitnessFunction<Double[]> {
 		
 		meanSquareError /= points.size();
 		
-		return meanSquareError;
+		return 1.0 / meanSquareError;
 	}
 }

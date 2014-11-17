@@ -1,7 +1,9 @@
 package komalo.genetic_algorithms.curve_fitting;
 
+import java.util.Arrays;
 import java.util.Random;
 
+import sun.rmi.runtime.Log;
 import komalo.genetic_algorithms.RandomGenerator;
 
 public class CurveFittingsSolutionGenerator implements RandomGenerator<Double[]> {

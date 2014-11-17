@@ -21,6 +21,8 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
 	private final double mutationProbability;
 
+	private final double crossOverProbability;
+
 	private final double populationNo;
 
 	private Random randomGenerator = new Random();
@@ -28,15 +30,18 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 	private RandomGenerator<SolutionType> randomSolutionGenerator;
 
 	public CanonicalGeneticAlgorithm(double populationNo, int iterationsNo,
-			double mutationProbability,
+			double mutationProbability, double crossOverProbability,
 			FitnessFunction<SolutionType> fitnessFunction,
 			ChromosomeCodec<SolutionType, GeneType> chromosomeCodec,
 			GeneMutator<GeneType> chromosomeMutator, RandomGenerator<SolutionType> randomSolutionGenerator) {
 
 		this.populationNo = populationNo;
 		this.iterationsNo = iterationsNo;
-		this.fitnessFunction = fitnessFunction;
+		
 		this.mutationProbability = mutationProbability;
+		this.crossOverProbability = crossOverProbability;
+		
+		this.fitnessFunction = fitnessFunction;
 		this.chromosomeCodec = chromosomeCodec;
 		this.geneMutator = chromosomeMutator;
 		this.randomSolutionGenerator = randomSolutionGenerator;
@@ -52,14 +57,22 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 			Main.log("Iteration No: " + i);
 			
 			ChromosomePair<GeneType> parents = selectParents();
+			
+			double crossOverTest = randomGenerator.nextDouble();
+			
+			ChromosomePair<GeneType> offSprings;
+			if(crossOverTest <= crossOverProbability){
+				offSprings = crossover(parents);
+				mutateChromosomeInPlace(offSprings.chromosome1);
+				mutateChromosomeInPlace(offSprings.chromosome2);
+				replaceInPopulation(parents, offSprings);
+			}
+			else{
+				mutateChromosomeInPlace(parents.chromosome1);
+				mutateChromosomeInPlace(parents.chromosome2);
+			}
+	
 
-			ChromosomePair<GeneType> offSprings = crossover(parents);
-
-			mutateChromosomeInPlace(offSprings.chromosome1);
-
-			mutateChromosomeInPlace(offSprings.chromosome2);
-
-			replaceInPopulation(parents, offSprings);
 		}
 	}
 	
