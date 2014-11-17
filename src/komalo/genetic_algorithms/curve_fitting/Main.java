@@ -1,4 +1,4 @@
-package komalo.genetic_algorithms;
+package komalo.genetic_algorithms.curve_fitting;
 
 public class Main {
 
