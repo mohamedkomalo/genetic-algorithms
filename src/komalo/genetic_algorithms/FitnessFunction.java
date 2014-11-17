@@ -1,5 +1,5 @@
 package komalo.genetic_algorithms;
 
-interface FitnessFunction<T> {
-	int evaluate(T val);
+public interface FitnessFunction<T> {
+	double evaluate(T solution);
 }

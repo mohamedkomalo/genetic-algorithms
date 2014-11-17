@@ -59,14 +59,14 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 	}
 
 	private ChromosomePair<GeneType> selectParents() {
-		List<Integer> cummulativeFitness = new LinkedList<>();
+		List<Double> cummulativeFitness = new LinkedList<>();
 		List<Chromosome<GeneType>> chromosomes = new LinkedList<>();
 
 		int lastFitness = 0;
 
 		for (Chromosome<GeneType> chromosome : population) {
 			SolutionType decoded = chromosomeCodec.decode(chromosome);
-			int fitness = fitnessFunction.evaluate(decoded);
+			double fitness = fitnessFunction.evaluate(decoded);
 
 			cummulativeFitness.add(fitness + lastFitness);
 			chromosomes.add(chromosome);
@@ -84,13 +84,13 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 	}
 
 	private Chromosome<GeneType> selectRandomParent(
-			List<Integer> cummulativeFitness,
+			List<Double> cummulativeFitness,
 			List<Chromosome<GeneType>> chromosomes) {
 
-		int totalFitness = cummulativeFitness
+		double totalFitness = cummulativeFitness
 				.get(cummulativeFitness.size() - 1);
 
-		int randomNumber = randomGenerator.nextInt(totalFitness);
+		double randomNumber = randomGenerator.nextDouble() * totalFitness;
 
 		for (int i = 0; i < cummulativeFitness.size() - 1; i++) {
 			if (randomNumber < cummulativeFitness.get(i + 1)) {
