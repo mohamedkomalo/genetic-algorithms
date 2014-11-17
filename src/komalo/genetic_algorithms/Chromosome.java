@@ -1,9 +1,7 @@
 package komalo.genetic_algorithms;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Chromosome<GeneType> {
 
@@ -12,7 +10,7 @@ public class Chromosome<GeneType> {
 	private int length;
 	
 	public Chromosome(int length) {
-		genes = new TreeMap<>();
+		genes = new HashMap<>();
 		
 		this.length = length;
 	}

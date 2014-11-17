@@ -165,7 +165,7 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
 		public ChromosomePair(Chromosome<GeneType> chromosome1,
 				Chromosome<GeneType> chromosome2) {
-			super();
+			
 			this.chromosome1 = chromosome1;
 			this.chromosome2 = chromosome2;
 		}
