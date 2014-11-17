@@ -25,7 +25,7 @@ public class CurveFittingFitnessFunction implements FitnessFunction<Double[]> {
 		
 		for(Point p : points){
 			double actualY = 0;
-			for(int degree=0; degree < polynomialDegree + 1; degree++){
+			for(int degree=0; degree <= polynomialDegree; degree++){
 				actualY += coefficients[degree] * Math.pow(p.x, degree);
 			}
 			meanSquareError += (actualY - p.y) * (actualY - p.y);

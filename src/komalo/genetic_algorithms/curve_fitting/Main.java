@@ -1,6 +1,7 @@
 package komalo.genetic_algorithms.curve_fitting;
 
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -75,6 +76,14 @@ public class Main {
 
 		CanonicalGeneticAlgorithm<Double[], Double>.SolutionInfo info = algorithm.getBestSolution();
 		
-		System.out.println("Coefficients: " + info.getSolution() + " Error: " + info.getFitness());
+		Main.output("Coefficients: " + Arrays.toString(info.getSolution()) + " Error: " + info.getFitness());
+	}
+
+	public static void output(String x) {
+		System.out.println(x);
+	}
+	
+	public static void log(String x) {
+		//System.out.println(x);
 	}
 }

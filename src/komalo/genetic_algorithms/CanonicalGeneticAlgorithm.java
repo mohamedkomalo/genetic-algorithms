@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import komalo.genetic_algorithms.curve_fitting.Main;
+
 public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
 	private List<Chromosome<GeneType>> population = new ArrayList<>();
@@ -46,6 +48,9 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 		generateRandomPopulation();
 
 		for (int i = 0; i < iterationsNo; i++) {
+			
+			Main.log("Iteration No: " + i);
+			
 			ChromosomePair<GeneType> parents = selectParents();
 
 			ChromosomePair<GeneType> offSprings = crossover(parents);
@@ -78,13 +83,13 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 		List<Double> cummulativeFitness = new LinkedList<>();
 		List<Chromosome<GeneType>> chromosomes = new LinkedList<>();
 
-		int lastFitness = 0;
+		double lastFitness = 0;
 
 		for (Chromosome<GeneType> chromosome : population) {
 			SolutionType decoded = chromosomeCodec.decode(chromosome);
-			double fitness = fitnessFunction.evaluate(decoded);
+			lastFitness += fitnessFunction.evaluate(decoded);
 
-			cummulativeFitness.add(fitness + lastFitness);
+			cummulativeFitness.add(lastFitness);
 			chromosomes.add(chromosome);
 		}
 
@@ -93,8 +98,13 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
 		Chromosome<GeneType> parent2 = parent1;
 
-		while (parent1 == parent2)
+		int trials = 0;
+		while (parent1 == parent2){
 			parent2 = selectRandomParent(cummulativeFitness, chromosomes);
+			
+			if(++trials > 20)
+				throw new RuntimeException("exceeded max ammount of tries to randomly select a parent");
+		}
 
 		return new ChromosomePair<>(parent1, parent2);
 	}
@@ -107,11 +117,17 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 				.get(cummulativeFitness.size() - 1);
 
 		double randomNumber = randomGenerator.nextDouble() * totalFitness;
-
-		for (int i = 0; i < cummulativeFitness.size() - 1; i++) {
-			if (randomNumber < cummulativeFitness.get(i + 1)) {
-				return chromosomes.get(i);
-			}
+		
+		Main.log("[Selection] chose a randomNumber: " + randomNumber + " totalFitness: " + totalFitness);
+		
+		for (int i = 1; i < cummulativeFitness.size(); i++) {
+			
+			Main.log("testing fitness: " + cummulativeFitness.get(i-1) +"    " + cummulativeFitness.get(i));
+			
+			if (randomNumber > cummulativeFitness.get(i)) 
+				continue;
+			
+			return chromosomes.get(i - 1);
 		}
 
 		throw new RuntimeException(
