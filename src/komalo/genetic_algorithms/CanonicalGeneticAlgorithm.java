@@ -152,7 +152,7 @@ public class CanonicalGeneticAlgorithm<SolutionType, GeneType> {
 
 			if (randomNumber < mutationProbability) {
 				GeneType newGene = geneMutator.mutuateGene(chromosome
-						.getGeneAt(i));
+						.getGeneAt(i), i, iterationsNo);
 
 				chromosome.setGeneAt(i, newGene);
 			}
