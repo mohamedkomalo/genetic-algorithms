@@ -1,6 +1,8 @@
 package komalo.genetic_algorithms.curve_fitting;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -14,11 +16,11 @@ import komalo.genetic_algorithms.RandomGenerator;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		int noOfTestCases, noOfPoints, polynomialDegree = 0;
 		Set<Point> points = new HashSet<>();
 
-		Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(new File("input.txt"));
 
 		noOfTestCases = scanner.nextInt();
 
